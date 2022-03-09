@@ -40,7 +40,7 @@ if __name__=='__main__':
     for i in range(100):
         coverage = []
         sensores = creaNodos(900, 30, 30)
-        creaVecindades(sensores, 1.5)
+        creaVecindades(sensores, 2)
         while len(coverage) <= 800:
             coverage.append(getCoverage(sensores)/900)
             dinamica(sensores)
