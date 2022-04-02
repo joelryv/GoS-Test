@@ -57,4 +57,6 @@ if __name__=='__main__':
     
     avrgCoverage = np.average(allCoverage, axis=0)
     plt.plot(avrgCoverage)
+    plt.xlabel('Time-steps')
+    plt.ylabel('Average coverage [%]')
     plt.show()
