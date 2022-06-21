@@ -1,6 +1,7 @@
 import numpy as np
 from sensors import Sensor
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 def creaNodos(n, areaX, areaY):
     nodos = []
@@ -37,7 +38,7 @@ def getCoverage(nodos):
 if __name__=='__main__':
     np.random.seed(1)
     allCoverage = []
-    for i in range(100):
+    for i in tqdm(range(100)):
         coverage = []
         sensores = creaNodos(900, 30, 30)
         creaVecindades(sensores, 2)
@@ -46,6 +47,8 @@ if __name__=='__main__':
             dinamica(sensores)
         allCoverage.append(coverage)
     
+    print('Saving results')
+
     maxLen = 0
     for muestra in allCoverage:
         if len(muestra) > maxLen:
@@ -54,9 +57,14 @@ if __name__=='__main__':
     for muestra in allCoverage:
         while len(muestra) < maxLen:
             muestra.append(0)
-    
+
     avrgCoverage = np.average(allCoverage, axis=0)
+    with open('resultados.txt', 'w') as f:
+        np.savetxt(f, avrgCoverage)
+    
+"""
     plt.plot(avrgCoverage)
     plt.xlabel('Time-steps')
     plt.ylabel('Average coverage [%]')
     plt.show()
+"""
